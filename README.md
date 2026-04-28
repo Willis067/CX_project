@@ -41,6 +41,7 @@ CX_project/
 ├── data/
 │   ├── cx_financials.csv        # Financial data (2015–2025)
 │   └── cx_operations.csv        # Operational data (2015–2025)
+|   └── cx_tableau.csv           # Data for Tableau
 ├── sql/
 │   ├── 0_create_table.sql
 │   ├── 1_full_revenue_story.sql
