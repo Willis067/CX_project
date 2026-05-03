@@ -4,13 +4,31 @@
 
 ## Overview
 
-A complete end-to-end data analytics project analysing **Cathay Pacific Airways** across 11 years (2015–2025), covering the airline's pre-COVID peak, the devastating pandemic collapse, and its ongoing recovery.
+I built this project to practise end-to-end data analytics on a real-world subject I care about — Cathay Pacific, Hong Kong's flag carrier. Rather than using a pre-cleaned classroom dataset, I compiled the data manually from official annual results announcements, designed the database schema, and wrote all SQL queries and visualisations.
 
-This project demonstrates a full analytics pipeline — from database design and SQL analysis to interactive visual dashboards — built on real data sourced from Cathay Pacific's official annual results announcements.
+The project tells a compelling business story: how one of the world's great airlines navigated a near-total shutdown during COVID-19, survived on cargo revenue alone, and rebuilt itself into a leaner, more profitable operation by 2025 — while still not fully recovering its pre-pandemic passenger volumes.
+
+**What this project demonstrates:**
+- Translating raw financial reports into a structured relational database
+- Writing SQL to extract meaningful business insights
+- Communicating findings clearly through interactive visual dashboards
+- Telling a data story with real-world context
 
 ---
+ 
+## 📌 Project Summary
+ 
+| | |
+|---|---|
+| **Subject** | Cathay Pacific Airways (0293.HK) |
+| **Period** | 2015 – 2025 (11 years) |
+| **Data** | Financial + operational metrics from official annual reports |
+| **Tools** | PostgreSQL 18, SQL, Tableau Public |
+| **Goal** | Demonstrate end-to-end analytics: database → SQL → dashboard |
+ 
+---
 
-## Key Findings
+## 🔍 Key Findings
 
 - **Revenue collapsed 56%** in 2020 — the largest single-year drop in the airline's history (HK$107B → HK$47B)
 - **Passenger volume hit 2% of 2019 levels** in 2021 — just 717,000 passengers for the entire year, roughly one week of normal operations
@@ -20,17 +38,7 @@ This project demonstrates a full analytics pipeline — from database design and
 - **Post-COVID Cathay is leaner** — cost per ATK dropped to 3.34 in recovery vs 3.80 pre-COVID, reflecting structural improvements from the pandemic restructuring
 - **Revenue recovered faster than passengers** — by 2023, revenue was at 88% of 2019 levels while passengers were only at 51%, reflecting a deliberate premium pricing strategy
 
----
 
-## Tools & Technologies
- 
-| Tool | Purpose |
-|---|---|
-| **PostgreSQL 18** | Database design, data storage |
-| **SQL** | Data analysis and querying |
-| **Tableau Public** | Interactive dashboard and visualisation |
-| **VS Code** | Development environment |
- 
 ---
  
 ## Project Structure
@@ -60,15 +68,50 @@ CX_project/
 ```
  
 ---
+## Database Schema
+ 
+Two tables joined on `year`:
+ 
+### `cx_financials`
+| Column | Description |
+|---|---|
+| `year` | Fiscal year (PK) |
+| `revenue_hkd_m` | Total revenue (HK$ million) |
+| `cost_of_revenue_hkd_m` | Total operating costs |
+| `gross_profit_hkd_m` | Gross profit |
+| `operating_income_hkd_m` | Operating income |
+| `net_income_hkd_m` | Net profit / loss |
+| `fuel_cost_hkd_m` | Fuel expenditure |
+| `staff_cost_hkd_m` | Staff expenditure |
+| `cost_per_atk_with_fuel` | Cost efficiency metric (with fuel) |
+| `cost_per_atk_without_fuel` | Cost efficiency metric (ex-fuel) |
+ 
+### `cx_operations`
+| Column | Description |
+|---|---|
+| `year` | Fiscal year (PK) |
+| `passengers_carried_000` | Passengers carried (thousands) |
+| `ask_million` | Available Seat Kilometres (millions) |
+| `rpk_million` | Revenue Passenger Kilometres (millions) |
+| `passenger_load_factor_pct` | Passenger load factor (%) |
+| `cargo_load_factor_pct` | Cargo load factor (%) |
+| `fleet_size` | Number of aircraft in service |
+| `destinations` | Number of destinations served |
+ 
+---
 
-## Dashboard
+## 📊 Dashboard
  
 **Live dashboard:** [Tableau Public — Cathay Pacific Performance Dashboard 2015–2025](https://public.tableau.com/views/CathayPacificPerformanceDashboard2015-2025/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
  
-The dashboard contains four charts:
+Four charts covering the full story:
  
-1. **Revenue vs Net Income** — dual-axis bar and line chart showing the full 11-year financial arc, coloured by era
-2. **Passenger Recovery vs 2019 Peak** — line chart with era bands showing the collapse to 2% and the ongoing recovery
-3. **Fuel & Staff Cost as % of Revenue** — dual line chart showing the 2020 crossover where staff costs overtook fuel costs
-4. **Cargo vs Passenger Load Factor** — dual line chart showing how cargo compensated when passengers disappeared
+| # | Chart | Type | Key Insight |
+|---|---|---|---|
+| 1 | Revenue vs Net Income | Bar + Line | 56% revenue collapse in 2020, recovery to new highs by 2025 |
+| 2 | Passenger Recovery vs 2019 Peak | Line with era bands | 2% of normal in 2021, still only 80% recovered by 2025 |
+| 3 | Fuel & Staff Cost as % of Revenue | Dual line | Staff costs overtook fuel costs in 2020 as flying stopped |
+| 4 | Cargo vs Passenger Load Factor | Dual line | Cargo crossed above passenger load factor during COVID years |
+ 
 ---
+
